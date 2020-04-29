@@ -14,6 +14,36 @@
         "hectares" => 100
     );
 
+    //Creates a const array to hold volume units
+    const   VOLUME_TO_LITER = array(
+        "cubic_inches" => 0.0163871,
+        "cubic_feet" => 28.3168,
+        "cubic_centimeters" => 0.001,
+        "cubic_meters" => 1000,
+        "imperial_gallons" => 4.54609,
+        "imperial_quarts" => 1.13652,
+        "imperial_pints" => 0.568261,
+        "imperial_cups" => 0.284131,
+        "imperial_ounces" => 0.0284131,
+        "imperial_tablespoons" => 0.0177582,
+        "imperial_teaspoons" => 0.00591939,
+        "us_gallons" => 3.78541,
+        "us_quarts" => 0.946353,
+        "us_pints" => 0.473176,
+        "us_cups" => 0.24,
+        "us_ounces" => 0.0295735,
+        "us_tablespoons" => 0.0147868,
+        "us_teaspoons" => 0.00492892,
+        "liters" => 1,
+        "milliliters" => 0.001,
+
+    );
+    function optionize($string){
+        return str_replace(' ','_', strtolower( $string));
+    }
+
+    ////////////////////////////
+    //Length convert
    function convert_to_meters($value=0.0, $from_unit){
        //codes to conve"rt using const array
        if(array_key_exists($from_unit,LENGTH_TO_METER)){
@@ -210,4 +240,31 @@ function convert_area($value, $from_unit, $to_unit){
     $new_value = convert_from_square_meters($meter_value, $to_unit);
     return $new_value;
 }
+
+
+
+    //////////////////////////////////////
+    //Volume section
+    //function to convert from other units to liters
+    function convert_to_liters($value,$from_unit){   
+        if(array_key_exists($from_unit,VOLUME_TO_LITER)){
+            return $value * VOLUME_TO_LITER[$from_unit];
+        }else{
+            return "Unsupported Unit.";
+        }
+    }
+
+    //function to convert from liters to other units
+    function convert_from_liters($value,$to_unit){
+        if(array_key_exists($to_unit,VOLUME_TO_LITER)){
+            return $value / VOLUME_TO_LITER[$to_unit];
+        }else{
+            return "Unsupported Unit.";
+        }
+    }
+    function convert_volume($value, $from_unit, $to_unit){
+        $liter_value = convert_to_liters($value,$from_unit);
+        $new_value = convert_from_liters($liter_value, $to_unit);
+        return $new_value;
+    }
 ?>
