@@ -1,77 +1,6 @@
 <?php
-    function convert_to_square_meters($value=0.0, $from_unit){
-        switch ($from_unit){
-            case "square_inches":
-                return $value * pow( 0.0254, 2) ;
-                break;
-            case "square_feet":
-                return $value * pow( 0.3048,2);
-                break;
-            case "square_yards":
-                return $value * pow(0.9144,2);
-                break;
-            case "square_miles":
-                return $value * pow(1609.344,2);
-                break;
-            case "square_millimeters":
-                return $value * pow(0.001,2);
-                break;
-            case "square_centimeters":
-                return $value * pow(0.01,2);
-                break;
-            case "square_meters":
-                return $value;
-                break;
-            case "square_kilometers":
-                return $value * pow(1000,2);
-                break;
-            default:
-                    return "Unsupported Unit.";
-            break;
-        }
-        return "Unsupported Unit.";
-    }
-
-    //Method to convert from meters to other units
-    function convert_from_square_meters($value=0.0, $to_unit){
-        switch ($to_unit){
-            case "square_inches":
-                return $value / pow(0.0254,2) ;
-                break;
-            case "square_feet":
-                return $value / pow(0.3048,2);
-                break;
-            case "square_yards":
-                return $value / pow(0.9144,2);
-                break;
-            case "square_miles":
-                return $value / pow(1609.344,2);
-                break;
-            case "square_millimeters":
-                return $value / pow(0.001,2);
-                break;
-            case "square_centimeters":
-                return $value / pow(0.01,2);
-                break;
-            case "square_meters":
-                return $value;
-                break;
-            case "square_kilometers":
-                return $value / pow(1000,2);
-                break;
-            default:
-                    return "Unsupported Unit.";
-            break;
-        }
-        return "Unsupported Unit.";
-    }
-
-    //method that calls both convert methods
-    function convert_area($value, $from_unit, $to_unit){
-        $meter_value = convert_to_square_meters($value, $from_unit);
-        $new_value = convert_from_square_meters($meter_value, $to_unit);
-        return $new_value;
-    }
+   
+   require_once ('../includes/functions.php');
     //handles submit method
     $from_value = '';
     $from_unit = '';
@@ -116,6 +45,8 @@
                     <option value="square_centimeters" <?php if($from_unit =='square_centimeters'){ echo " selected";}?>>square centimeters</option>
                     <option value="square_meters" <?php if($from_unit =='square_meters'){ echo " selected";}?>>square meters</option>
                     <option value="square_kilometers" <?php if($from_unit =='square_kilometers'){ echo " selected";}?>>square kilometers</option>
+                    <option value="acres" <?php if($from_unit =='acres'){ echo " selected";}?>> acres</option>
+                    <option value="hectares" <?php if($from_unit =='hectares'){ echo " selected";}?>>hectares</option>
                 </select>
             </div>
             <div class=entry>
@@ -130,6 +61,8 @@
                     <option value="square_centimeters" <?php if($to_unit == 'square_centimeters'){ echo " selected";}?>>square centimeters</option>
                     <option value="square_meters" <?php if($to_unit == 'square_meters'){ echo " selected";}?>>square meters</option>
                     <option value="square_kilometers" <?php if($to_unit == 'square_kilometers'){ echo " selected";}?>>square kilometers</option>
+                    <option value="acres" <?php if($to_unit =='acres'){ echo " selected";}?>> acres</option>
+                    <option value="hectares" <?php if($to_unit =='hectares'){ echo " selected";}?>>hectares</option>
                 </select>
             </div>
             <input type="submit" name="submit" value="Submit">
