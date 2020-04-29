@@ -81,7 +81,7 @@ form input[type="text"]:hover{
 form select{
     margin: 1em 0;
     font-size: 14px;
-    width: 100px;
+    /* width: 150px; */
 }
 
 form input[type="submit"]{

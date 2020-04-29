@@ -125,7 +125,7 @@
                 <option value="inches" <?php if($to_unit == 'inches'){ echo " selected";}?>>inches</option>
                     <option value="feet" <?php if($to_unit == 'feet'){ echo " selected";}?>>feet</option>
                     <option value="yards" <?php if($to_unit == 'yards'){ echo " selected";}?>>yards</option>
-                    <option value="yards" <?php if($to_unit =='miles'){ echo " selected";}?>>miles</option>
+                    <option value="miles" <?php if($to_unit =='miles'){ echo " selected";}?>>miles</option>
                     <option value="millimeters" <?php if($to_unit == 'millimeters'){ echo " selected";}?>>millimeters</option>
                     <option value="centimeters" <?php if($to_unit == 'centimeters'){ echo " selected";}?>>centimeters</option>
                     <option value="meters" <?php if($to_unit == 'meters'){ echo " selected";}?>>meters</option>
