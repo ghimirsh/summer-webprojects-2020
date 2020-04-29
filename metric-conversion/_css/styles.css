@@ -99,5 +99,6 @@ form input[type="submit"]{
 
 form input[type="submit"]:hover{
     color:white;
+    font-weight: bold ;
     background-color: #FDB912;
 }
