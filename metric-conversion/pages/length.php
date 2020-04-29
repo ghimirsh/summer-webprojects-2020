@@ -48,6 +48,14 @@
             </div>
             <div class=entry>
                 <label for="">To:</label>&nbsp;
+                <?php 
+                    if($to_value == "" || $to_value == 0){
+                        $to_value = "";
+                    }
+                    else{
+                        $to_value = float_to_string($to_value);
+                    }
+                ?>
                 <input type="text" name="to_value" value="<?php echo $to_value; ?>">&nbsp;
                 <select name="to_unit">
                 <option value="inches" <?php if($to_unit == 'inches'){ echo " selected";}?>>inches</option>

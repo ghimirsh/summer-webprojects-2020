@@ -38,6 +38,30 @@
         "milliliters" => 0.001,
 
     );
+
+    //const array to hold mass to kilograms conversion values
+    const MASS_TO_KILOGRAM = array(
+        "ounces" =>	0.0283495,
+        "pounds" =>	0.453592,
+        "stones" =>	6.35029,
+        "long_tons" =>	1016.05,
+        "short_tons" =>	907.185,
+        "milligrams" =>	0.000001,
+        "grams" =>	0.001,
+        "kilograms" =>	1,
+        "metric_tonnes" =>	1000
+    );
+
+    function float_to_string($float,$precision=20){
+        //echo "testing : " .  gettype($float);
+        $float = (float) $float;//converts $float into float data type explicitly
+        $string = number_format($float,$precision,'.',''); //formats the numbers upto 20 dp precision 
+        //echo "testing: ". $new_value;
+        $string = rtrim($string,'0');//to remove trailing zeros (0s) after decimal point , only removes 0s if not followed by other non-zero digits
+        $string = rtrim($string,'.');//removes decimal point (.) if there are no other digits after it
+        return $string;
+    }
+
     function optionize($string){
         return str_replace(' ','_', strtolower( $string));
     }
@@ -265,6 +289,33 @@ function convert_area($value, $from_unit, $to_unit){
     function convert_volume($value, $from_unit, $to_unit){
         $liter_value = convert_to_liters($value,$from_unit);
         $new_value = convert_from_liters($liter_value, $to_unit);
+        return $new_value;
+    }
+
+
+    ////////////////////////////////////////////////////
+    //Mass and Kilograms Conversion
+     //Volume section
+    //function to convert from other units to liters
+    function convert_to_kilograms($value,$from_unit){   
+        if(array_key_exists($from_unit,MASS_TO_KILOGRAM)){
+            return $value * MASS_TO_KILOGRAM[$from_unit];
+        }else{
+            return "Unsupported Unit.";
+        }
+    }
+
+    //function to convert from liters to other units
+    function convert_from_kilograms($value,$to_unit){
+        if(array_key_exists($to_unit,MASS_TO_KILOGRAM)){
+            return $value / MASS_TO_KILOGRAM[$to_unit];
+        }else{
+            return "Unsupported Unit.";
+        }
+    }
+    function convert_mass($value, $from_unit, $to_unit){
+        $liter_value = convert_to_kilograms($value,$from_unit);
+        $new_value = convert_from_kilograms($liter_value, $to_unit);
         return $new_value;
     }
 ?>
