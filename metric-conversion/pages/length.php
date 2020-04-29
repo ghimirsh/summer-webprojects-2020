@@ -32,6 +32,46 @@
         return "Unsupported Unit.";
     }
 
+    //Method to convert from meters to other units
+    function convert_from_meters($value=0.0, $to_unit){
+        switch ($to_unit){
+            case "inches":
+                return $value / 0.0254 ;
+                break;
+            case "feet":
+                return $value / 0.3048;
+                break;
+            case "yards":
+                return $value / 0.9144;
+                break;
+            case "miles":
+                return $value / 1609.344;
+                break;
+            case "millimeters":
+                return $value / 0.001;
+                break;
+            case "centimeters":
+                return $value / 0.01;
+                break;
+            case "meters":
+                return $value / 1;
+                break;
+            case "kilometers":
+                return $value / 1000;
+                break;
+            default:
+                    return "Unsupported Unit.";
+            break;
+        }
+        return "Unsupported Unit.";
+    }
+
+    //method that calls both convert methods
+    function convert_length($value, $from_unit, $to_unit){
+        $meter_value = convert_to_meters($value, $from_unit);
+        $new_value = convert_from_meters($meter_value, $to_unit);
+        return $new_value;
+    }
     //handles submit method
     $from_value = '';
     $from_unit = '';
@@ -47,8 +87,7 @@
             $from_unit = $_POST['from_unit'];
             $to_unit = $_POST['to_unit'];
             //$to_value = number_format( convert_to_meters($from_value, $from_unit),2);
-            $to_value = convert_to_meters($from_value, $from_unit);
-    
+            $to_value = convert_length($from_value, $from_unit,$to_unit);
     }
     
 ?>
