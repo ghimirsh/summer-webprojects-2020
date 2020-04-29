@@ -11,7 +11,8 @@
         "meters" => 1,
         "kilometers" => 1000,
         "acres" => 63.614907234075,
-        "hectares" => 100
+        "hectares" => 100,
+        "nautical_miles" => 1852
     );
 
     //Creates a const array to hold volume units
@@ -52,7 +53,7 @@
         "metric_tonnes" =>	1000
     );
 
-    function float_to_string($float,$precision=20){
+    function float_to_string($float,$precision=12){
         //echo "testing : " .  gettype($float);
         $float = (float) $float;//converts $float into float data type explicitly
         $string = number_format($float,$precision,'.',''); //formats the numbers upto 20 dp precision 
@@ -304,7 +305,6 @@ function convert_area($value, $from_unit, $to_unit){
             return "Unsupported Unit.";
         }
     }
-
     //function to convert from liters to other units
     function convert_from_kilograms($value,$to_unit){
         if(array_key_exists($to_unit,MASS_TO_KILOGRAM)){
@@ -317,5 +317,28 @@ function convert_area($value, $from_unit, $to_unit){
         $liter_value = convert_to_kilograms($value,$from_unit);
         $new_value = convert_from_kilograms($liter_value, $to_unit);
         return $new_value;
+    }
+
+
+
+    ///////////////////////////////
+    //speed conversion
+    function convert_speed($value, $from_unit, $to_unit){
+        if($from_unit == 'knots'){
+            $from_unit = 'nautical_miles_per_hour';
+        }
+        if($to_unit == 'knots'){
+            $to_unit = 'nautical_miles_per_hour';
+        }
+        list($from_dist,$from_time) = explode('_per_',$from_unit);
+        list($to_dist,$to_time) = explode('_per_',$to_unit);
+        if($from_time == 'hour'){
+            $value /= 3600;
+        }
+        $value = convert_length($value,$from_dist,$to_dist);
+        if($to_time == 'hour'){
+            $value *= 3600;
+        }
+        return $value;
     }
 ?>

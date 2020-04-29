@@ -25,7 +25,8 @@
       "feet per second",
       "miles per hour",
       "meters per second",
-      "kilometers per hour"   
+      "kilometers per hour",
+      "knots"   
     );
 
     
