@@ -287,6 +287,7 @@ function convert_area($value, $from_unit, $to_unit){
             return "Unsupported Unit.";
         }
     }
+
     function convert_volume($value, $from_unit, $to_unit){
         $liter_value = convert_to_liters($value,$from_unit);
         $new_value = convert_from_liters($liter_value, $to_unit);
@@ -314,8 +315,8 @@ function convert_area($value, $from_unit, $to_unit){
         }
     }
     function convert_mass($value, $from_unit, $to_unit){
-        $liter_value = convert_to_kilograms($value,$from_unit);
-        $new_value = convert_from_kilograms($liter_value, $to_unit);
+        $kg_value = convert_to_kilograms($value,$from_unit);
+        $new_value = convert_from_kilograms($kg_value, $to_unit);
         return $new_value;
     }
 
@@ -341,4 +342,52 @@ function convert_area($value, $from_unit, $to_unit){
         }
         return $value;
     }
+
+    ////////////////////////////////////////////////
+    //Temperature
+    function convert_to_celsius($value, $from_unit) {
+        $value = (float) $value;
+        $result = 0;
+        switch($from_unit) {
+          case 'celsius':
+            return $value;
+            break;
+          case 'fahrenheit':
+            $result = ($value - 32) / 1.8;
+            //echo "Testing:  ". $value . "  ". $result ;
+            return $result;
+            break;
+          case 'kelvin':
+            $result = $value - 273.15;
+            return $result;
+            break;
+          default:
+            return "Unsupported unit.";
+        }
+      }
+      
+      function convert_from_celsius($value, $to_unit) {
+        $value = (float) $value;
+        switch($to_unit) {
+          case 'celsius':
+            return $value;
+            break;
+          case 'fahrenheit':
+            return ($value * 1.8) + 32;
+            break;
+          case 'kelvin':
+            return $value + 273.15;
+            break;
+          default:
+            return "Unsupported unit.";
+        }
+      }
+      
+      function convert_temperature($value, $from_unit, $to_unit) {
+        $celsius_value = convert_to_celsius($value, $from_unit);
+        $new_value = convert_from_celsius($celsius_value, $to_unit);
+        return $new_value;
+      }
+      
+
 ?>
